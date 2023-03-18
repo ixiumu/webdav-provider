@@ -2,6 +2,7 @@ package me.alexbakker.webdav.provider
 
 import android.webkit.MimeTypeMap
 import com.thegrizzlylabs.sardineandroid.model.Response
+import java.net.URL
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 import java.nio.file.Path
@@ -41,7 +42,7 @@ class WebDavFile(
         get() = URLDecoder.decode(name, StandardCharsets.UTF_8.name())
 
     constructor (res: Response, href: String = res.href)
-            : this(Paths.get(href), res.propstat[0].prop.resourcetype.collection != null) {
+            : this(parsePath(href), res.propstat[0].prop.resourcetype.collection != null) {
         val prop = res.propstat[0].prop
         etag = prop.getetag
         contentType = parseContentType(name, prop.getcontenttype)
@@ -80,5 +81,14 @@ class WebDavFile(
         }
 
         return "application/octet-stream"
+    }
+
+    companion object {
+        fun parsePath(href: String): Path {
+            if (href.startsWith("http://") || href.startsWith("https://")) {
+                return Paths.get(URL(href).path)
+            }
+            return Paths.get(href)
+        }
     }
 }

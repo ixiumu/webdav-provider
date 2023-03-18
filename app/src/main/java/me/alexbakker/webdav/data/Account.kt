@@ -21,6 +21,9 @@ data class Account(
     @ColumnInfo(name = "name")
     var name: String? = null,
 
+    @ColumnInfo(name = "summary")
+    var summary: String? = null,
+
     @ColumnInfo(name = "url")
     var url: String? = null,
 

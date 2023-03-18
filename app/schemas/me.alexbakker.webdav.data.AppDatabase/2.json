@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "c8481ab6705693f178069e2a0d1a5353",
+    "identityHash": "fee68de5f05e8d9aff6e5c6fee4fa024",
     "entities": [
       {
         "tableName": "account",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `url` TEXT, `protocol` TEXT NOT NULL DEFAULT 'AUTO', `verify_certs` INTEGER NOT NULL, `username` TEXT, `password` TEXT, `max_cache_file_size` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `summary` TEXT, `url` TEXT, `protocol` TEXT NOT NULL DEFAULT 'AUTO', `verify_certs` INTEGER NOT NULL, `username` TEXT, `password` TEXT, `max_cache_file_size` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -17,6 +17,12 @@
           {
             "fieldPath": "name",
             "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "summary",
+            "columnName": "summary",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -59,10 +65,10 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": true,
           "columnNames": [
             "id"
-          ],
-          "autoGenerate": true
+          ]
         },
         "indices": [],
         "foreignKeys": []
@@ -115,10 +121,10 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": true,
           "columnNames": [
             "id"
-          ],
-          "autoGenerate": true
+          ]
         },
         "indices": [
           {
@@ -128,6 +134,7 @@
               "account_id",
               "path"
             ],
+            "orders": [],
             "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_cache_entry_account_id_path` ON `${TABLE_NAME}` (`account_id`, `path`)"
           }
         ],
@@ -149,7 +156,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c8481ab6705693f178069e2a0d1a5353')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fee68de5f05e8d9aff6e5c6fee4fa024')"
     ]
   }
 }

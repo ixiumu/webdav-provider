@@ -1,5 +1,6 @@
 package me.alexbakker.webdav.fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.DocumentsContract
@@ -71,11 +72,12 @@ class MainFragment : Fragment() {
     }
 
     private fun startEditAccount(account: Account) {
-        val action = MainFragmentDirections.actionMainFragmentToAccountFragment(account.id, getString(R.string.edit_account))
+        val action = MainFragmentDirections.actionMainFragmentToAccountFragment(getString(R.string.edit_account), account.id)
         findNavController().navigate(action)
     }
 
     private inner class Listener : AccountAdapter.Listener {
+        @SuppressLint("QueryPermissionsNeeded")
         override fun onAccountClick(account: Account) {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.setDataAndType(account.rootUri, DocumentsContract.Document.MIME_TYPE_DIR)

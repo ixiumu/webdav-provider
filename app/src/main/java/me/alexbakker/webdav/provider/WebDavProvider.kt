@@ -406,13 +406,13 @@ class WebDavProvider : DocumentsProvider() {
 
         cursor.newRow().apply {
             add(Root.COLUMN_ROOT_ID, account.id)
-            add(Root.COLUMN_SUMMARY, account.name)
+            add(Root.COLUMN_SUMMARY, account.summary)
             add(Root.COLUMN_FLAGS, Root.FLAG_SUPPORTS_CREATE or Root.FLAG_SUPPORTS_IS_CHILD)
-            add(Root.COLUMN_TITLE, "WebDAV")
+            add(Root.COLUMN_TITLE, account.name ?:"WebDAV")
             add(Root.COLUMN_DOCUMENT_ID, buildDocumentId(account, account.rootPath))
             add(Root.COLUMN_MIME_TYPES, null)
             add(Root.COLUMN_AVAILABLE_BYTES, root?.quotaAvailableBytes)
-            add(Root.COLUMN_ICON, R.mipmap.ic_launcher)
+            add(Root.COLUMN_ICON, R.drawable.ic_baseline_link)
 
             var avail: Long? = null
             if (root?.quotaUsedBytes != null && root.quotaAvailableBytes != null) {

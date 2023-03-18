@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         binding.fab.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToAccountFragment(-1, getString(R.string.add_account))
+            val action = MainFragmentDirections.actionMainFragmentToAccountFragment(getString(R.string.add_account), -1)
             navController.navigate(action)
         }
 

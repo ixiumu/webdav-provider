@@ -1,5 +1,6 @@
 package me.alexbakker.webdav.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -68,6 +69,7 @@ class AccountAdapter(
         notifyItemRemoved(i)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun clearSelection() {
         selectedAccounts.clear()
         notifyDataSetChanged()
